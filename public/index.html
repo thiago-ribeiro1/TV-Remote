@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samsung TV Remote</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="2638995.ico"> <!-- Ícone -->
+</head>
+
+<body>
+    <div class="background">
+        <img src="img/glenn-carstens-peters-EOQhsfFBhRk-unsplash.jpg" alt="watchtv-bg-img">
+    </div>
+    <!-- Tela de iPhone para o design do controle remoto -->
+    <div class="iphone-frame">
+        <img src="iphone-xr.png" alt="iPhone XR Frame" class="iphone-img">
+        <div class="screen">
+            <div class="container">
+                <div class="top-bar">
+                    <span class="connection-status">● TV Remote</span>
+                </div>
+                <div class="remote">
+                    <!-- Botão de ligar/desligar -->
+                    <div class="row">
+                        <img src="img/desligar-ligar.png" class="button power" onclick="sendKey('KEY_POWER')">
+                    </div>
+                    <!-- Botões de menu, home e voltar -->
+                    <div class="row">
+                        <img src="img/menu.png" class="button" onclick="sendKey('KEY_MENU')">
+                        <img src="img/home.png" class="button" onclick="sendKey('KEY_HOME')">
+                        <img src="img/voltar.png" class="button" onclick="sendKey('KEY_BACK')">
+                    </div>
+                    <!-- Navegação com direções e botão OK -->
+                    <div class="row navigation">
+                        <img src="img/cima.png" class="button" onclick="sendKey('KEY_UP')">
+                        <img src="img/esquerda.png" class="button" onclick="sendKey('KEY_LEFT')">
+                        <img src="img/OK.png" class="button ok" onclick="sendKey('KEY_ENTER')">
+                        <img src="img/direita.png" class="button" onclick="sendKey('KEY_RIGHT')">
+                        <img src="img/baixo.png" class="button" onclick="sendKey('KEY_DOWN')">
+                    </div>
+                    <!-- Botões de controle de volume e mudo -->
+                    <div class="row">
+                        <img src="img/volume-up.png" class="button" onclick="sendKey('KEY_VOLUP')">
+                        <img src="img/volume-down.png" class="button" onclick="sendKey('KEY_VOLDOWN')">
+                        <img src="img/mute.png" class="button" onclick="sendKey('KEY_MUTE')">
+                    </div>
+                    <!-- Botões para mudar de canal -->
+                    <div class="row">
+                        <img src="img/channel-up.png" class="button" onclick="sendKey('KEY_CHUP')">
+                        <img src="img/channel-down.png" class="button" onclick="sendKey('KEY_CHDOWN')">
+                    </div>
+                </div>
+                <span class="connection-status">● By Thiago Ribeiro</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script para enviar as teclas pressionadas para o servidor -->
+    <script>
+        function sendKey(key) {
+            try {
+                const response = fetch(`/control/${key}`); // Envia a solicitação ao servidor
+                const data = response.text(); // Obtém a resposta do servidor
+                console.log(data); // Exibe a resposta no console
+            } catch (error) {
+                console.error('Error:', error); // Tratamento de erro para exibir mensagem no console
+            }
+        }
+    </script>
+</body>
+
+</html>
